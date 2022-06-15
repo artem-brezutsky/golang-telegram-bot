@@ -29,23 +29,6 @@ func New(host string, token string) Client {
 	}
 }
 
-func newBasePath(token string) string {
-	return "bot" + token
-}
-
-func (c *Client) SendMessage(chatId int, text string) error {
-	q := url.Values{}
-	q.Add("chat_id", strconv.Itoa(chatId))
-	q.Add("text", text)
-
-	_, err := c.doRequest(sendMessageMethod, q)
-	if err != nil {
-		return e.Wrap("can`t do request", err)
-	}
-
-	return nil
-}
-
 func (c *Client) Updates(offset int, limit int) (updates []Update, err error) {
 	defer func() { err = e.WrapIfErr("can`t do request", err) }()
 
@@ -65,6 +48,19 @@ func (c *Client) Updates(offset int, limit int) (updates []Update, err error) {
 	}
 
 	return res.Result, err
+}
+
+func (c *Client) SendMessage(chatId int, text string) error {
+	q := url.Values{}
+	q.Add("chat_id", strconv.Itoa(chatId))
+	q.Add("text", text)
+
+	_, err := c.doRequest(sendMessageMethod, q)
+	if err != nil {
+		return e.Wrap("can`t do request", err)
+	}
+
+	return nil
 }
 
 func (c *Client) doRequest(method string, query url.Values) (data []byte, err error) {
@@ -95,4 +91,8 @@ func (c *Client) doRequest(method string, query url.Values) (data []byte, err er
 	}
 
 	return body, nil
+}
+
+func newBasePath(token string) string {
+	return "bot" + token
 }
