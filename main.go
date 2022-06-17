@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"go-telegram-bot/clients/telegram"
 	"log"
 )
 
@@ -10,7 +11,7 @@ const (
 )
 
 func main() {
-	//tgClient = telegram.New(tgBotHost, mustToken()) done!
+	tgClient = telegram.New(tgBotHost, mustToken())
 
 	// fetcher = fetcher.New(tgClient)
 
