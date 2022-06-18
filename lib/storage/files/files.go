@@ -18,8 +18,6 @@ type Storage struct {
 
 const defaultPerm = 0774
 
-var ErrNotSavePage = errors.New("no saved pages")
-
 func New(basePatch string) Storage {
 	return Storage{basePatch: basePatch}
 }
@@ -63,7 +61,7 @@ func (s Storage) PickRandom(userName string) (page *storage.Page, err error) {
 	}
 
 	if len(files) == 0 {
-		return nil, ErrNotSavePage
+		return nil, storage.ErrNotSavePage
 	}
 
 	rand.Seed(time.Now().UnixNano())
