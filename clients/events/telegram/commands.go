@@ -44,7 +44,7 @@ func (p *Processor) savePage(chatID int, pageURL string, username string) (err e
 		UserName: username,
 	}
 
-	isExists, err := p.storage.IsExist(page)
+	isExists, err := p.storage.IsExists(page)
 	if err != nil {
 		return err
 	}
