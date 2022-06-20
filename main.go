@@ -4,7 +4,7 @@ import (
 	"flag"
 	"go-telegram-bot/clients/events/telegram"
 	tgClient "go-telegram-bot/clients/telegram"
-	event_consumer "go-telegram-bot/consumer/event-consumer"
+	eventConsumer "go-telegram-bot/consumer/event-consumer"
 	"go-telegram-bot/lib/storage/files"
 	"log"
 )
@@ -23,7 +23,7 @@ func main() {
 
 	log.Print("service started")
 
-	consumer := event_consumer.New(eventsProcessor, eventsProcessor, batchSize)
+	consumer := eventConsumer.New(eventsProcessor, eventsProcessor, batchSize)
 	if err := consumer.Start(); err != nil {
 		log.Fatal("service is stopped", err)
 	}
